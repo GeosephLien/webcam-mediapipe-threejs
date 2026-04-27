@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VRM Face Capture Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Webcam → MediaPipe → VRM</p>
+          <h1>Real-Time Face Tracking for VRM Avatars</h1>
+          <p class="hero-copy">
+            Capture facial motion from your webcam, estimate blendshapes and head pose with
+            MediaPipe, then drive a three.js VRM avatar in real time.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="startButton" class="start-button">Start Camera and Avatar</button>
+          <p id="statusText" class="status-chip">Not started</p>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel webcam-panel">
+          <div class="panel-head">
+            <h2>Webcam</h2>
+            <span class="panel-badge">Face Tracking</span>
+          </div>
+          <div class="video-shell">
+            <video id="webcam" autoplay playsinline muted></video>
+            <div class="video-overlay"></div>
+          </div>
+        </section>
+
+        <section class="panel avatar-panel">
+          <div class="panel-head">
+            <h2>VRM Avatar</h2>
+            <span class="panel-badge">three.js</span>
+          </div>
+          <canvas id="scene"></canvas>
+        </section>
+      </main>
+
+      <aside class="telemetry panel">
+        <div class="panel-head">
+          <h2>Telemetry</h2>
+          <span class="panel-badge">ARKit Blendshapes</span>
+        </div>
+        <dl class="metric-grid">
+          <div class="metric">
+            <dt>Tracking Status</dt>
+            <dd id="faceState">Waiting to start</dd>
+          </div>
+          <div class="metric">
+            <dt>Jaw Open</dt>
+            <dd id="jawOpenValue">0.000</dd>
+          </div>
+          <div class="metric">
+            <dt>Blink</dt>
+            <dd id="blinkValue">0.000 / 0.000</dd>
+          </div>
+          <div class="metric">
+            <dt>Smile</dt>
+            <dd id="smileValue">0.000 / 0.000</dd>
+          </div>
+          <div class="metric">
+            <dt>Head Rot</dt>
+            <dd id="headRotationValue">0.00, 0.00, 0.00</dd>
+          </div>
+          <div class="metric">
+            <dt>Avatar Binding</dt>
+            <dd id="bindingValue">Not loaded</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <footer class="footer-note">
+        Open this page through a local HTTP server such as `python -m http.server` or VS Code
+        Live Server. Webcam access usually will not work from `file://`.
+      </footer>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
